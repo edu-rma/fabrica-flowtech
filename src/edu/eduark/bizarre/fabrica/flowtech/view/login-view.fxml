@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.LoginController">
+    <stylesheets>
+        <URL value="@/edu/eduark/bizarre/fabrica/flowtech/resources/style/css/login-view.fxml.css"/>
+    </stylesheets>
+   <children>
+      <VBox alignment="CENTER" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" spacing="15.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <Label text="Bienvenido" styleClass="title-label" />
+            <TextField fx:id="txtCorreo" promptText="Correo electrónico" />
+            <PasswordField fx:id="txtContrasena" promptText="Contraseña" />
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Button fx:id="btnIniciarSesion" mnemonicParsing="false" text="Iniciar Sesión" defaultButton="true" />
+                  <Button fx:id="btnRegistrarse" mnemonicParsing="false" text="Registrarse" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
