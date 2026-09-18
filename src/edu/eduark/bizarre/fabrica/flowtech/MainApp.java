@@ -1,20 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package edu.eduark.bizarre.fabrica.flowtech;
 
-/**
- *
- * @author informatica
- */
-public class MainApp {
+import edu.eduark.bizarre.fabrica.flowtech.utils.SceneManager;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class MainApp extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Le pasamos el escenario principal al SceneManager
+        SceneManager.getInstance().setPrimaryStage(primaryStage);
+        
+        // Le decimos que inicie con la vista de Login
+        SceneManager.getInstance().changeScene(
+            "/edu/eduark/bizarre/fabrica/flowtech/resources/view/login-view.fxml", 
+            "FlowTech - Iniciar Sesión"
+        );
     }
-    
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
