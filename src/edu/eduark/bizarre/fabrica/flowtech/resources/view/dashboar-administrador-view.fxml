@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/css/dashboar-view.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.AdministradorDashboardController">
+   <left>
+      <VBox alignment="TOP_CENTER" prefWidth="220.0" spacing="8.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+         </padding>
+         <children>
+            <Label styleClass="sidebar-title" text="FlowTech" />
+            <Label fx:id="lblUsuario" styleClass="sidebar-user" text="Usuario" />
+            <Label fx:id="lblRol" styleClass="sidebar-rol" text="Rol" />
+            <Separator />
+            <Button fx:id="btnInicio" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarInicio" styleClass="menu-button" text="Inicio" />
+            <Button fx:id="btnProduccion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarProduccion" styleClass="menu-button" text="Producción" />
+            <Button fx:id="btnInventario" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarInventario" styleClass="menu-button" text="Inventario" />
+            <Button fx:id="btnReportes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarReportes" styleClass="menu-button" text="Reportes" />
+            <Button fx:id="btnUsuarios" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarUsuarios" styleClass="menu-button" text="Usuarios" />
+            <Region VBox.vgrow="ALWAYS" />
+            <Button fx:id="btnCerrarSesion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cerrarSesion" styleClass="menu-button-salir" text="Cerrar sesión" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <StackPane fx:id="contentArea" styleClass="content-area" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblContenidoActual" styleClass="content-label" text="Cargando..." wrapText="true" />
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
