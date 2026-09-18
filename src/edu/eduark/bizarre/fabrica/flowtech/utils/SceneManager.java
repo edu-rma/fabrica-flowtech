@@ -42,11 +42,6 @@ public class SceneManager {
         }
     }
 
-    /**
-     * Igual que changeScene, pero devuelve el controller de la vista cargada
-     * para poder pasarle datos justo después (por ejemplo, el usuario y el
-     * rol que acaban de iniciar sesión, hacia DashboardController).
-     */
     public <T> T changeSceneAndGetController(String fxmlPath, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

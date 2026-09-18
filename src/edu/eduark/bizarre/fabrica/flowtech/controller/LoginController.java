@@ -1,28 +1,29 @@
 package edu.eduark.bizarre.fabrica.flowtech.controller;
 
-import edu.eduark.bizarre.fabrica.flowtech.model.RolUsuario;
+import edu.eduark.bizarre.fabrica.flowtech.config.DataBaseConnection;
 import edu.eduark.bizarre.fabrica.flowtech.utils.SceneManager;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 public class LoginController implements Initializable {
 
-    @FXML
-    private TextField txtCorreo;
+    @FXML private TextField txtCorreo;
+    @FXML private PasswordField txtContrasena;
+    @FXML private Button btnIniciarSesion;
+    @FXML private Button btnRegistrarse;
+    @FXML private Label lblMensaje;
 
-    @FXML
-    private PasswordField txtContrasena;
-
-    @FXML
-    private Button btnIniciarSesion;
-
-    @FXML
-    private Button btnRegistrarse;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -30,54 +31,70 @@ public class LoginController implements Initializable {
         btnIniciarSesion.setOnAction(event -> iniciarSesionDocente());
     }
 
-    private void iniciarSesionDocente() {
+   private void iniciarSesionDocente() {
         String correo = txtCorreo.getText();
         String contrasena = txtContrasena.getText();
 
         if (correo.isEmpty() || contrasena.isEmpty()) {
-            System.out.println("Por favor, ingrese el correo y contraseña del docente.");
+            System.out.println("Por favor, ingrese correo y contraseña.");
             return;
         }
 
-        // TODO: reemplazar por la consulta real (DAO / MySQL) que valide
-        // credenciales y devuelva el RolUsuario del usuario autenticado.
-        System.out.println("Iniciando sesión: " + correo);
-        String nombreUsuario = correo;
-        RolUsuario rolDetectado = RolUsuario.CLIENTE; // placeholder hasta conectar el DAO
+        String sql = "SELECT id_rol, nombre, password_hash FROM usuarios WHERE email = ? AND activo = TRUE";
 
-        redirigirSegunRol(nombreUsuario, rolDetectado);
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, correo);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int idRol = rs.getInt("id_rol");
+                String hashDb = rs.getString("password_hash");
+                
+                if (contrasena.equals(hashDb)) { 
+                    redirigirPorRol(idRol);
+                } else {
+                    System.out.println("Contraseña incorrecta.");
+                }
+            } else {
+                System.out.println("El usuario no existe o está inactivo.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Envía al usuario al dashboard correspondiente a su rol, y le pasa sus
-     * datos de sesión al controller recién cargado.
-     */
-    private void redirigirSegunRol(String nombreUsuario, RolUsuario rol) {
-        switch (rol) {
-            case CLIENTE -> {
-                ClienteDashboardController dc = SceneManager.getInstance().changeSceneAndGetController(
-                        "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-cliente-view.fxml",
-                        "FlowTech - Dashboard Cliente");
-                dc.configurarUsuario(nombreUsuario, rol);
-            }
-            case EMPLEADO -> {
-                EmpleadoDashboardController dc = SceneManager.getInstance().changeSceneAndGetController(
-                        "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-empleado-view.fxml",
-                        "FlowTech - Dashboard Empleado");
-                dc.configurarUsuario(nombreUsuario, rol);
-            }
-            case ADMINISTRADOR -> {
-                AdministradoDashboarController dc = SceneManager.getInstance().changeSceneAndGetController(
-                        "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-administrador-view.fxml",
-                        "FlowTech - Dashboard Administrador");
-                dc.configurarUsuario(nombreUsuario, rol);
-            }
+    private void redirigirPorRol(int idRol) {
+        switch (idRol) {
+            case 1: // ADMIN
+                SceneManager.getInstance().changeScene(
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-administrador-view.fxml", 
+                    "FlowTech - Dashboard Admin"
+                );
+                break;
+            case 2: // EMPLEADO
+                SceneManager.getInstance().changeScene(
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-empleado-view.fxml", 
+                    "FlowTech - Dashboard Empleado"
+                );
+                break;
+            case 3: // CLIENTE
+                SceneManager.getInstance().changeScene(
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-cliente-view.fxml", 
+                    "FlowTech - Dashboard Cliente"
+                );
+                break;
+            default:
+                System.out.println("Rol no reconocido.");
         }
     }
 
     private void irAlRegistro() {
         SceneManager.getInstance().changeScene(
-                "/edu/eduark/bizarre/fabrica/flowtech/resources/view/registro-view.fxml",
-                "FlowTech - Crear Cuenta");
+            "/edu/eduark/bizarre/fabrica/flowtech/resources/view/registro-view.fxml", 
+            "FlowTech - Crear Cuenta"
+        );
     }
 }

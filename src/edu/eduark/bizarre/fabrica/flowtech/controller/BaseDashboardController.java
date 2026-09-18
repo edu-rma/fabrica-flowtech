@@ -10,11 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-/**
- * Controller base compartido por los 3 dashboards (Cliente, Empleado,
- * Administrador). Centraliza lo común: nombre/rol del usuario en sesión,
- * el mensaje de bienvenida y el cierre de sesión.
- */
+
+
 public abstract class BaseDashboardController implements Initializable {
 
     @FXML
@@ -29,14 +26,10 @@ public abstract class BaseDashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Cada subclase puede sobreescribir para inicializar sus propios
-        // componentes visuales antes de configurarUsuario(...).
+ 
     }
 
-    /**
-     * Debe llamarse justo después de cambiar a esta vista, normalmente desde
-     * LoginController tras un login exitoso.
-     */
+
     public void configurarUsuario(String nombreUsuario, RolUsuario rol) {
         this.nombreUsuario = nombreUsuario;
         this.rol = rol;

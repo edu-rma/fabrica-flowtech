@@ -13,7 +13,7 @@ public class AuthRepository {
     public Usuario buscarPorUsuario(String nombreUsuario) {
         String sql = "SELECT id_usuario, nombre, usuario, clave, rol, estado, fecha_creacion FROM usuario WHERE usuario = ?";
         
-        try (Connection con = DataBaseConnection.getConexion();
+        try (Connection con = DataBaseConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             
             ps.setString(1, nombreUsuario);

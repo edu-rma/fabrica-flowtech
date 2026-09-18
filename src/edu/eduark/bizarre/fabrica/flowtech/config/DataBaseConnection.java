@@ -1,4 +1,3 @@
-
 package edu.eduark.bizarre.fabrica.flowtech.config;
 
 import java.sql.Connection;
@@ -7,16 +6,12 @@ import java.sql.SQLException;
 
 public class DataBaseConnection {
     
-    public static Connection getConexion() throws SQLException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(
-                Credentials.URL, 
-                Credentials.USER, 
-                Credentials.PASSWORD
-            );
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("Driver JDBC de MySQL no encontrado.", e);
-        }
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(
+            Credentials.DB_URL, 
+            Credentials.DB_USER, 
+            Credentials.DB_PASSWORD
+        );
     }
 }

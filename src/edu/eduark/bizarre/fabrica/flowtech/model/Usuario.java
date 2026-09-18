@@ -17,7 +17,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    // Constructor para registrar nuevos usuarios (sin ID ni fecha)
+
     public Usuario(String nombre, String usuario, String clave, String rol, String estado) {
         this.nombre = nombre;
         this.usuario = usuario;
@@ -26,7 +26,7 @@ public class Usuario {
         this.estado = estado;
     }
 
-    // Constructor completo (para consultas de base de datos)
+
     public Usuario(int idUsuario, String nombre, String usuario, String clave, String rol, String estado, Timestamp fechaCreacion) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -37,7 +37,7 @@ public class Usuario {
         this.fechaCreacion = fechaCreacion;
     }
 
-    // Getters y Setters
+
     public int getIdUsuario() {
         return idUsuario;
     }
