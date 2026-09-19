@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/css/dashboar-view.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.AdministradorDashboardController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/css/dashboar-view.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.EmpleadoDashboardController">
    <left>
       <VBox alignment="TOP_CENTER" prefWidth="220.0" spacing="8.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <padding>
@@ -18,13 +18,11 @@
          <children>
             <Label styleClass="sidebar-title" text="FlowTech" />
             <Label fx:id="lblUsuario" styleClass="sidebar-user" text="Usuario" />
-            <Label fx:id="lblRol" styleClass="sidebar-rol" text="Rol" />
+            <Label fx:id="lblRol" styleClass="sidebar-rol" text="empleado" />
             <Separator />
             <Button fx:id="btnInicio" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarInicio" styleClass="menu-button" text="Inicio" />
             <Button fx:id="btnProduccion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarProduccion" styleClass="menu-button" text="Producción" />
             <Button fx:id="btnInventario" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarInventario" styleClass="menu-button" text="Inventario" />
-            <Button fx:id="btnReportes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarReportes" styleClass="menu-button" text="Reportes" />
-            <Button fx:id="btnUsuarios" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarUsuarios" styleClass="menu-button" text="Usuarios" />
             <Region VBox.vgrow="ALWAYS" />
             <Button fx:id="btnCerrarSesion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cerrarSesion" styleClass="menu-button-salir" text="Cerrar sesión" />
          </children>
