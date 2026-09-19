@@ -70,19 +70,19 @@ public class LoginController implements Initializable {
         switch (idRol) {
             case 1: // ADMIN
                 SceneManager.getInstance().changeScene(
-                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-administrador-view.fxml", 
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboard-administrador-view.fxml", 
                     "FlowTech - Dashboard Admin"
                 );
                 break;
             case 2: // EMPLEADO
                 SceneManager.getInstance().changeScene(
-                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-empleado-view.fxml", 
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboard-empleado-view.fxml", 
                     "FlowTech - Dashboard Empleado"
                 );
                 break;
             case 3: // CLIENTE
                 SceneManager.getInstance().changeScene(
-                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-cliente-view.fxml", 
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboard-cliente-view.fxml", 
                     "FlowTech - Dashboard Cliente"
                 );
                 break;
