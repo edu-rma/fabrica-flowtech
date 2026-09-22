@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="650.0" prefWidth="1050.0" stylesheets="@../style/css/dashboar-view.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.DashboardEmpleadoController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="topbar">
+         <children>
+            <VBox spacing="3.0">
+               <children>
+                  <Label styleClass="app-name" text="FLOWTECH" />
+                  <Label styleClass="topbar-subtitle" text="Panel de empleado" />
+               </children>
+            </VBox>
+            <HBox HBox.hgrow="ALWAYS" />
+            <Label styleClass="user-chip" text="Empleado" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox spacing="20.0" styleClass="page-content">
+         <children>
+            <VBox spacing="4.0">
+               <children>
+                  <Label styleClass="page-title" text="Mis órdenes de producción" />
+                  <Label styleClass="page-subtitle" text="Consulta y actualiza las órdenes que tienes asignadas." />
+               </children>
+            </VBox>
+            <HBox spacing="16.0">
+               <children>
+                  <VBox HBox.hgrow="ALWAYS" styleClass="metric-card">
+                     <children><Label styleClass="metric-label" text="ÓRDENES ASIGNADAS" /><Label fx:id="lblTotal" styleClass="metric-value" text="0" /></children>
+                  </VBox>
+                  <VBox HBox.hgrow="ALWAYS" styleClass="metric-card metric-blue">
+                     <children><Label styleClass="metric-label" text="EN PROCESO" /><Label fx:id="lblProceso" styleClass="metric-value" text="0" /></children>
+                  </VBox>
+                  <VBox HBox.hgrow="ALWAYS" styleClass="metric-card metric-warning">
+                     <children><Label styleClass="metric-label" text="PLANIFICADAS" /><Label fx:id="lblPlanificadas" styleClass="metric-value" text="0" /></children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox spacing="14.0" styleClass="table-card" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label styleClass="section-title" text="Órdenes a cargo" />
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="cmbEstado" prefWidth="145.0" promptText="Estado" />
+                        <TextField fx:id="txtBuscar" prefWidth="220.0" promptText="Buscar por orden o producto" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tablaOrdenes" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="colOrden" prefWidth="75.0" text="ORDEN" />
+                        <TableColumn fx:id="colPedido" prefWidth="75.0" text="PEDIDO" />
+                        <TableColumn fx:id="colProducto" prefWidth="280.0" text="PRODUCTO" />
+                        <TableColumn fx:id="colCantidad" prefWidth="100.0" text="CANTIDAD" />
+                        <TableColumn fx:id="colInicio" prefWidth="130.0" text="FECHA INICIO" />
+                        <TableColumn fx:id="colEstado" prefWidth="135.0" text="ESTADO" />
+                        <TableColumn fx:id="colAccion" prefWidth="120.0" text="ACCIÓN" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+         <padding><Insets bottom="28.0" left="36.0" right="36.0" top="28.0" /></padding>
+      </VBox>
+   </center>
+</BorderPane>
