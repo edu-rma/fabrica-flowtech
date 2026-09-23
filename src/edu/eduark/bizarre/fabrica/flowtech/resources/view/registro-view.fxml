@@ -65,12 +65,12 @@
 
             <!-- Mensaje de estado -->
             <Label fx:id="lblMensaje" alignment="CENTER" styleClass="mensaje-label" wrapText="true" />
+            <Label fx:id="lblTipoCuenta" alignment="CENTER" styleClass="rol-detectado" wrapText="true" />
 
             <!-- Botones de Acción -->
             <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Button fx:id="btnRegistrarCliente" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Registrar como cliente" />
-                  <Button fx:id="btnRegistrarEmpleado" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Registrar como empleado" />
+                  <Button fx:id="btnRegistrarUsuario" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Crear cuenta" />
                   <Button fx:id="btnRegresarLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Volver al Login" />
                </children>
             </VBox>

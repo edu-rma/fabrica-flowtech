@@ -18,7 +18,9 @@
          <children>
             <Label styleClass="sidebar-title" text="FlowTech" />
             <Label fx:id="lblUsuario" styleClass="sidebar-user" text="Usuario" />
-            <Label fx:id="lblRol" styleClass="sidebar-rol" text="Rol" />
+            
+            <Label fx:id="lblRol" styleClass="sidebar-rol" text="Cliente" />
+            
             <Separator />
             <Button fx:id="btnInicio" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarInicio" styleClass="menu-button" text="Inicio" />
             <Button fx:id="btnMisPedidos" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarMisPedidos" styleClass="menu-button" text="Mis Pedidos" />

@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginController implements Initializable {
 
@@ -53,7 +54,7 @@ public class LoginController implements Initializable {
                 int idRol = rs.getInt("id_rol");
                 String hashDb = rs.getString("password_hash");
                 
-                if (contrasena.equals(hashDb)) { 
+                if (coincideContrasena(contrasena, hashDb)) { 
                     redirigirPorRol(idRol);
                 } else {
                     System.out.println("Contraseña incorrecta.");
@@ -66,23 +67,32 @@ public class LoginController implements Initializable {
         }
     }
 
+    private boolean coincideContrasena(String contrasena, String hashGuardado) {
+        try {
+            return hashGuardado != null && BCrypt.checkpw(contrasena, hashGuardado);
+        } catch (IllegalArgumentException error) {
+            System.err.println("El hash almacenado no es BCrypt válido.");
+            return false;
+        }
+    }
+
     private void redirigirPorRol(int idRol) {
         switch (idRol) {
             case 1: // ADMIN
                 SceneManager.getInstance().changeScene(
-                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-administrador-view.fxml", 
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboard-admin.fxml", 
                     "FlowTech - Dashboard Admin"
                 );
                 break;
             case 2: // EMPLEADO
                 SceneManager.getInstance().changeScene(
-                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-empleado-view.fxml", 
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboard-empleado.fxml", 
                     "FlowTech - Dashboard Empleado"
                 );
                 break;
             case 3: // CLIENTE
                 SceneManager.getInstance().changeScene(
-                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboar-cliente-view.fxml", 
+                    "/edu/eduark/bizarre/fabrica/flowtech/resources/view/dashboard-cliente-view.fxml", 
                     "FlowTech - Dashboard Cliente"
                 );
                 break;

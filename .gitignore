@@ -7,7 +7,4 @@
 #Archivos de compilacion
 *.class
 *.jar
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/implementacion-registro-view
+*.zip

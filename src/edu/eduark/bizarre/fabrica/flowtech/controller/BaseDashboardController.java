@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 
 
 
@@ -20,6 +21,8 @@ public abstract class BaseDashboardController implements Initializable {
     protected Label lblRol;
     @FXML
     protected Label lblContenidoActual;
+    @FXML
+    protected StackPane contentArea;
 
     protected String nombreUsuario;
     protected RolUsuario rol;
