@@ -9,8 +9,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-
-
+import javafx.scene.layout.StackPane;
 
 public abstract class BaseDashboardController implements Initializable {
 
@@ -20,15 +19,24 @@ public abstract class BaseDashboardController implements Initializable {
     protected Label lblRol;
     @FXML
     protected Label lblContenidoActual;
+    @FXML
+    protected StackPane contentArea;
 
     protected String nombreUsuario;
     protected RolUsuario rol;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
- 
+
     }
 
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public RolUsuario getRol() {
+        return rol;
+    }
 
     public void configurarUsuario(String nombreUsuario, RolUsuario rol) {
         this.nombreUsuario = nombreUsuario;

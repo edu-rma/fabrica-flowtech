@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="650.0" prefWidth="1050.0" stylesheets="@../style/css/flowtech-theme.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.DashboardAdminController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="topbar">
+         <children>
+            <VBox spacing="3.0"><children><Label styleClass="app-name" text="FLOWTECH" /><Label styleClass="topbar-subtitle" text="Panel de administración" /></children></VBox>
+            <HBox HBox.hgrow="ALWAYS" />
+            <Label styleClass="user-chip admin-chip" text="Administrador" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox spacing="20.0" styleClass="page-content">
+         <children>
+            <VBox spacing="4.0"><children><Label styleClass="page-title" text="Control de inventario" /><Label styleClass="page-subtitle" text="Supervisa existencias de productos terminados y atiende alertas de reabastecimiento." /></children></VBox>
+            <HBox spacing="16.0">
+               <children>
+                  <VBox HBox.hgrow="ALWAYS" styleClass="metric-card"><children><Label styleClass="metric-label" text="PRODUCTOS REGISTRADOS" /><Label fx:id="lblProductos" styleClass="metric-value" text="0" /></children></VBox>
+                  <VBox HBox.hgrow="ALWAYS" styleClass="metric-card metric-danger"><children><Label styleClass="metric-label" text="ALERTAS DE STOCK" /><Label fx:id="lblAlertas" styleClass="metric-value" text="0" /></children></VBox>
+                  <VBox HBox.hgrow="ALWAYS" styleClass="metric-card metric-blue"><children><Label styleClass="metric-label" text="PEDIDOS EN PRODUCCIÓN" /><Label fx:id="lblPedidosProceso" styleClass="metric-value" text="0" /></children></VBox>
+               </children>
+            </HBox>
+            <VBox spacing="14.0" styleClass="table-card" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label styleClass="section-title" text="Inventario de productos" />
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="cmbFiltro" prefWidth="145.0" />
+                        <TextField fx:id="txtBuscar" prefWidth="220.0" promptText="Buscar por SKU o producto" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tablaInventario" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="colSku" prefWidth="135.0" text="SKU" />
+                        <TableColumn fx:id="colProducto" prefWidth="380.0" text="PRODUCTO" />
+                        <TableColumn fx:id="colStock" prefWidth="145.0" text="STOCK ACTUAL" />
+                        <TableColumn fx:id="colMinimo" prefWidth="145.0" text="STOCK MÍNIMO" />
+                        <TableColumn fx:id="colEstado" prefWidth="160.0" text="ESTADO" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+         <padding><Insets bottom="28.0" left="36.0" right="36.0" top="28.0" /></padding>
+      </VBox>
+   </center>
+</BorderPane>

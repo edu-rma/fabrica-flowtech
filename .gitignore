@@ -8,6 +8,10 @@
 *.class
 *.jar
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> feature/implementacion-registro-view
+=======
+*.zip
+>>>>>>> master

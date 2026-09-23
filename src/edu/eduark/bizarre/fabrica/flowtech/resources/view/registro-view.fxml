@@ -6,75 +6,103 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="root-scroll" stylesheets="@../style/css/registro-view.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.RegistroController">
-   <content>
-      <VBox alignment="CENTER" prefWidth="465.0" spacing="20.0" styleClass="main-container">
-         <padding>
-            <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
-         </padding>
+<HBox prefHeight="620.0" prefWidth="900.0" stylesheets="@../style/css/flowtech-theme.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.RegistroController">
+   <children>
+      <!-- Panel de marca: foto de fábrica + overlay + contenido -->
+      <StackPane prefWidth="300.0" styleClass="brand-panel" HBox.hgrow="NEVER">
          <children>
-            <!-- Cabecera -->
-            <VBox alignment="CENTER" spacing="5.0">
+            <Region styleClass="brand-photo" />
+            <Region styleClass="brand-overlay" />
+            <VBox alignment="TOP_LEFT" spacing="18.0" styleClass="brand-content">
                <children>
-                  <Label styleClass="titulo-vista" text="Crear Cuenta" />
-                  <Label styleClass="subtitulo-vista" text="Completa los datos para registrarte en FlowTech" />
-               </children>
-            </VBox>
-
-            <!-- Formulario Vertical Moderno -->
-            <VBox spacing="12.0" styleClass="form-container">
-               <children>
-                  <VBox spacing="4.0">
+                  <ImageView fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo-icon.png" />
+                     </image>
+                  </ImageView>
+                  <HBox alignment="CENTER_LEFT" spacing="0.0" styleClass="brand-logo-row">
                      <children>
-                        <Label styleClass="form-label" text="Nombre" />
-                        <TextField fx:id="txtNombre" promptText="Ingresa tu nombre" />
+                        <Label styleClass="brand-logo-flow" text="FLOW" />
+                        <Label styleClass="brand-logo-tech" text="TECH" />
                      </children>
-                  </VBox>
-
-                  <VBox spacing="4.0">
-                     <children>
-                        <Label styleClass="form-label" text="Apellido" />
-                        <TextField fx:id="txtApellido" promptText="Ingresa tu apellido" />
-                     </children>
-                  </VBox>
-
-                  <VBox spacing="4.0">
-                     <children>
-                        <Label styleClass="form-label" text="Correo Electrónico" />
-                        <TextField fx:id="txtEmail" promptText="correo@ejemplo.com" />
-                     </children>
-                  </VBox>
-
-                  <VBox spacing="4.0">
-                     <children>
-                        <Label styleClass="form-label" text="Contraseña" />
-                        <PasswordField fx:id="txtClave" promptText="••••••••" />
-                     </children>
-                  </VBox>
-
-                  <VBox spacing="4.0">
-                     <children>
-                        <Label styleClass="form-label" text="Confirmar Contraseña" />
-                        <PasswordField fx:id="txtConfirmarClave" promptText="••••••••" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-
-            <!-- Mensaje de estado -->
-            <Label fx:id="lblMensaje" alignment="CENTER" styleClass="mensaje-label" wrapText="true" />
-
-            <!-- Botones de Acción -->
-            <VBox alignment="CENTER" spacing="10.0">
-               <children>
-                  <Button fx:id="btnRegistrarCliente" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Registrar como cliente" />
-                  <Button fx:id="btnRegistrarEmpleado" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Registrar como empleado" />
-                  <Button fx:id="btnRegresarLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Volver al Login" />
+                  </HBox>
+                  <Label styleClass="brand-tagline" text="CONTROL DE PRODUCCIÓN Y ENSAMBLAJE" wrapText="true" />
+                  <Region VBox.vgrow="ALWAYS" />
+                  <Label styleClass="brand-headline" text="Únete y empieza a controlar tu producción" wrapText="true" />
+                  <Region VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </children>
-      </VBox>
-   </content>
-</ScrollPane>
+      </StackPane>
+
+      <!-- Panel de formulario -->
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="root-scroll" HBox.hgrow="ALWAYS">
+         <content>
+            <VBox alignment="TOP_CENTER" spacing="16.0" styleClass="form-panel">
+               <padding>
+                  <Insets bottom="40.0" left="55.0" right="55.0" top="40.0" />
+               </padding>
+               <children>
+                  <VBox spacing="4.0">
+                     <children>
+                        <Label styleClass="form-title" text="Crear cuenta" />
+                        <Label styleClass="form-subtitle" text="Completa la información para registrarte en FlowTech" wrapText="true" />
+                     </children>
+                  </VBox>
+
+                  <HBox spacing="12.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" styleClass="input-group" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="input-icon" text="👤" />
+                              <TextField fx:id="txtNombre" promptText="Nombre" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" styleClass="input-group" HBox.hgrow="ALWAYS">
+                           <children>
+                              <TextField fx:id="txtApellido" promptText="Apellido" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+
+                  <HBox alignment="CENTER_LEFT" styleClass="input-group">
+                     <children>
+                        <Label styleClass="input-icon" text="✉" />
+                        <TextField fx:id="txtEmail" promptText="Correo electrónico" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+
+                  <HBox alignment="CENTER_LEFT" styleClass="input-group">
+                     <children>
+                        <Label styleClass="input-icon" text="🔒" />
+                        <PasswordField fx:id="txtClave" promptText="Contraseña" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+
+                  <HBox alignment="CENTER_LEFT" styleClass="input-group">
+                     <children>
+                        <Label styleClass="input-icon" text="🔒" />
+                        <PasswordField fx:id="txtConfirmarClave" promptText="Confirmar contraseña" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+
+                  <Label styleClass="form-hint" text="El rol se asignará según el correo institucional." wrapText="true" />
+                  <Label fx:id="lblMensaje" styleClass="mensaje-label" wrapText="true" />
+                  <Label fx:id="lblTipoCuenta" styleClass="rol-detectado" wrapText="true" />
+
+                  <Button fx:id="btnRegistrarUsuario" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Registrarse" />
+                  <Button fx:id="btnRegresarLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="btn-outline" text="Volver al login" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</HBox>

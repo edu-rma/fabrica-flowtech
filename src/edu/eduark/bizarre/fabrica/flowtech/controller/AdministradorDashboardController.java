@@ -2,7 +2,7 @@ package edu.eduark.bizarre.fabrica.flowtech.controller;
 
 import javafx.fxml.FXML;
 
-public class AdministradoDashboarController extends BaseDashboardController {
+public class AdministradorDashboardController extends BaseDashboardController {
 
     @FXML
     private void mostrarProduccion() {
