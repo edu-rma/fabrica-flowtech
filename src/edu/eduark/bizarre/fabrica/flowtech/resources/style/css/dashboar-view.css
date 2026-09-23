@@ -1,0 +1,81 @@
+.sidebar {
+    -fx-background-color: #1f2937;
+}
+
+.sidebar-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 0 0 10 0;
+}
+
+.sidebar-user {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f9fafb;
+}
+
+.sidebar-rol {
+    -fx-font-size: 12px;
+    -fx-text-fill: #9ca3af;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e5e7eb;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 12 10 12;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.menu-button:hover {
+    -fx-background-color: #374151;
+}
+
+.menu-button-salir {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f87171;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 12 10 12;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.menu-button-salir:hover {
+    -fx-background-color: #4b1d1d;
+}
+
+.content-area {
+    -fx-background-color: #f3f4f6;
+}
+
+.content-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #1f2937;
+}
+
+.content-scroll, .content-scroll > .viewport, .page-content { -fx-background-color: #f3f4f6; }
+.page-title { -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #172033; }
+.card, .kpi-card, .product-card { -fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #e5e7eb; }
+.kpi-card { -fx-min-width: 170; }
+.kpi-card .page-title { -fx-font-size: 25px; -fx-text-fill: #2563eb; }
+.timeline-done, .timeline-next { -fx-padding: 7 10; -fx-background-radius: 14; }
+.timeline-done { -fx-background-color: #dcfce7; -fx-text-fill: #166534; }
+.timeline-next { -fx-background-color: #fef3c7; -fx-text-fill: #92400e; }
+.quick-action, .cart-button { -fx-background-color: #2563eb; -fx-text-fill: white; -fx-background-radius: 6; -fx-cursor: hand; }
+.quick-action { -fx-padding: 10 15; }
+.product-container { -fx-padding: 4 0; }
+.product-card { -fx-min-height: 160; }
+.category-visual { -fx-background-color: linear-gradient(to right, #1d4ed8, #0ea5e9); -fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: bold; -fx-padding: 22 12; -fx-alignment: CENTER; -fx-background-radius: 7; }
+.product-code { -fx-font-size: 10px; -fx-text-fill: #64748b; }
+.product-details { -fx-font-size: 12px; -fx-text-fill: #334155; }
+.small-action { -fx-background-color: #dbeafe; -fx-text-fill: #1d4ed8; }
+.add-cart-button { -fx-background-color: #1677e8; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand; }
+.add-cart-button:hover { -fx-background-color: #095fc4; }
+.add-cart-button:disabled { -fx-opacity: 0.55; }
+.remove-cart-button { -fx-background-color: #fee2e2; -fx-text-fill: #b91c1c; -fx-cursor: hand; }
+.cart-summary { -fx-font-weight: bold; -fx-text-fill: #1d4ed8; -fx-padding: 8 0 0 0; }
+.hint-label { -fx-text-fill: #6b7280; -fx-font-size: 12px; }

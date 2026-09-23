@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="root-scroll" stylesheets="@../style/css/registro-view.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.RegistroController">
+   <content>
+      <VBox alignment="CENTER" prefWidth="465.0" spacing="20.0" styleClass="main-container">
+         <padding>
+            <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+         </padding>
+         <children>
+            <!-- Cabecera -->
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label styleClass="titulo-vista" text="Crear Cuenta" />
+                  <Label styleClass="subtitulo-vista" text="Completa los datos para registrarte en FlowTech" />
+               </children>
+            </VBox>
+
+            <!-- Formulario Vertical Moderno -->
+            <VBox spacing="12.0" styleClass="form-container">
+               <children>
+                  <VBox spacing="4.0">
+                     <children>
+                        <Label styleClass="form-label" text="Nombre" />
+                        <TextField fx:id="txtNombre" promptText="Ingresa tu nombre" />
+                     </children>
+                  </VBox>
+
+                  <VBox spacing="4.0">
+                     <children>
+                        <Label styleClass="form-label" text="Apellido" />
+                        <TextField fx:id="txtApellido" promptText="Ingresa tu apellido" />
+                     </children>
+                  </VBox>
+
+                  <VBox spacing="4.0">
+                     <children>
+                        <Label styleClass="form-label" text="Correo Electrónico" />
+                        <TextField fx:id="txtEmail" promptText="correo@ejemplo.com" />
+                     </children>
+                  </VBox>
+
+                  <VBox spacing="4.0">
+                     <children>
+                        <Label styleClass="form-label" text="Contraseña" />
+                        <PasswordField fx:id="txtClave" promptText="••••••••" />
+                     </children>
+                  </VBox>
+
+                  <VBox spacing="4.0">
+                     <children>
+                        <Label styleClass="form-label" text="Confirmar Contraseña" />
+                        <PasswordField fx:id="txtConfirmarClave" promptText="••••••••" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+
+            <!-- Mensaje de estado -->
+            <Label fx:id="lblMensaje" alignment="CENTER" styleClass="mensaje-label" wrapText="true" />
+            <Label fx:id="lblTipoCuenta" alignment="CENTER" styleClass="rol-detectado" wrapText="true" />
+
+            <!-- Botones de Acción -->
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Button fx:id="btnRegistrarUsuario" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Crear cuenta" />
+                  <Button fx:id="btnRegresarLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Volver al Login" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

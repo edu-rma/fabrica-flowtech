@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" styleClass="content-scroll" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.ClienteInicioController">
+    <content>
+        <VBox spacing="16.0" styleClass="page-content">
+            <padding>
+                <Insets top="26.0" right="26.0" bottom="26.0" left="26.0" />
+            </padding>
+            <children>
+                <Label styleClass="page-title" text="Inicio" />
+                <Label text="Resumen de tu actividad y el seguimiento de tu pedido mas reciente." />
+
+                <HBox spacing="14.0">
+                    <children>
+                        <VBox styleClass="kpi-card" spacing="5.0" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
+                            </padding>
+                            <children>
+                                <Label text="Pedidos activos" />
+                                <Label fx:id="lblPedidosActivos" styleClass="page-title" text="0" />
+                                <Label text="En transito" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="kpi-card" spacing="5.0" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
+                            </padding>
+                            <children>
+                                <Label text="Compras realizadas" />
+                                <Label fx:id="lblComprasRealizadas" styleClass="page-title" text="0" />
+                                <Label text="Historial completo" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="kpi-card" spacing="5.0" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
+                            </padding>
+                            <children>
+                                <Label text="Beneficios disponibles" />
+                                <Label fx:id="lblBeneficios" styleClass="page-title" text="0 pts" />
+                                <Label text="Cupon: FLOW10" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <VBox styleClass="card" spacing="10.0">
+                    <padding>
+                        <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
+                    </padding>
+                    <children>
+                        <Label styleClass="page-title" text="Seguimiento en tiempo real" />
+                        <Label fx:id="lblResumenPedido" text="Sin pedidos recientes" />
+                        <HBox spacing="12.0" alignment="CENTER_LEFT">
+                            <children>
+                                <Label fx:id="lblEstadoPedido" styleClass="timeline-next" text="Sin estado" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <Label styleClass="page-title" text="Acciones rapidas" />
+                <HBox spacing="10.0">
+                    <children>
+                        <Button styleClass="quick-action" text="Volver a pedir" onAction="#volverAPedir" />
+                        <Button styleClass="quick-action" text="Contactar soporte" onAction="#contactarSoporte" />
+                        <Button styleClass="quick-action" text="Descargar factura" onAction="#descargarFactura" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
