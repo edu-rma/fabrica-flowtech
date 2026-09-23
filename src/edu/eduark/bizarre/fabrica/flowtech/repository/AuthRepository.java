@@ -36,5 +36,29 @@ public class AuthRepository {
         }
         return null;
     }
+
     
+    public UsuarioAuth buscarPorEmail(String email) {
+        String sql = "SELECT id_rol, nombre, password_hash FROM usuarios WHERE email = ? AND activo = TRUE";
+
+        try (Connection con = DataBaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new UsuarioAuth(
+                        rs.getInt("id_rol"),
+                        rs.getString("nombre"),
+                        rs.getString("password_hash")
+                    );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public record UsuarioAuth(int idRol, String nombre, String passwordHash) {}
 }

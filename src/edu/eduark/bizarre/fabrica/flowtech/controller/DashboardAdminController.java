@@ -1,10 +1,7 @@
 package edu.eduark.bizarre.fabrica.flowtech.controller;
 
-import edu.eduark.bizarre.fabrica.flowtech.config.DataBaseConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import edu.eduark.bizarre.fabrica.flowtech.repository.InventarioRepository;
+import edu.eduark.bizarre.fabrica.flowtech.repository.PedidoRepository;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,8 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-/** Controlador para dashboard-admin.fxml. */
 public class DashboardAdminController {
+    
     @FXML private TableView<InventarioFila> tablaInventario;
     @FXML private TableColumn<InventarioFila, String> colSku;
     @FXML private TableColumn<InventarioFila, String> colProducto;
@@ -33,6 +30,10 @@ public class DashboardAdminController {
 
     private final ObservableList<InventarioFila> inventario = FXCollections.observableArrayList();
     private FilteredList<InventarioFila> inventarioFiltrado;
+
+    // Instancias de la capa de datos (Repository)
+    private final InventarioRepository inventarioRepository = new InventarioRepository();
+    private final PedidoRepository pedidoRepository = new PedidoRepository();
 
     @FXML
     private void initialize() {
@@ -52,37 +53,18 @@ public class DashboardAdminController {
     }
 
     private void cargarInventario() {
-        String sql = "SELECT p.codigo_sku, p.nombre, ip.stock_actual, ip.stock_minimo "
-                + "FROM inventario_productos ip INNER JOIN productos p ON p.id_producto = ip.id_producto "
-                + "ORDER BY p.codigo_sku";
-        try (Connection conexion = DataBaseConnection.getConnection();
-                PreparedStatement sentencia = conexion.prepareStatement(sql);
-                ResultSet resultado = sentencia.executeQuery()) {
-            while (resultado.next()) {
-                int actual = resultado.getInt("stock_actual");
-                int minimo = resultado.getInt("stock_minimo");
-                inventario.add(new InventarioFila(resultado.getString("codigo_sku"), resultado.getString("nombre"),
-                        actual, minimo, actual <= minimo ? "REABASTECER" : "DISPONIBLE"));
-            }
-        } catch (SQLException error) {
-            System.err.println("No fue posible cargar el inventario: " + error.getMessage());
+        inventario.clear();
+        
+   
+        var items = inventarioRepository.obtenerInventario();
+        for (var item : items) {
+            String estado = item.stockActual() <= item.stockMinimo() ? "REABASTECER" : "DISPONIBLE";
+            inventario.add(new InventarioFila(item.sku(), item.producto(), item.stockActual(), item.stockMinimo(), estado));
         }
 
         lblProductos.setText(String.valueOf(inventario.size()));
         lblAlertas.setText(String.valueOf(inventario.stream().filter(fila -> fila.stockActual() <= fila.stockMinimo()).count()));
-        lblPedidosProceso.setText(String.valueOf(contarPedidosEnProceso()));
-    }
-
-    private int contarPedidosEnProceso() {
-        String sql = "SELECT COUNT(*) FROM pedidos WHERE estado = 'EN_PRODUCCION'";
-        try (Connection conexion = DataBaseConnection.getConnection();
-                PreparedStatement sentencia = conexion.prepareStatement(sql);
-                ResultSet resultado = sentencia.executeQuery()) {
-            return resultado.next() ? resultado.getInt(1) : 0;
-        } catch (SQLException error) {
-            System.err.println("No fue posible contar los pedidos: " + error.getMessage());
-            return 0;
-        }
+        lblPedidosProceso.setText(String.valueOf(pedidoRepository.contarPedidosEnProduccion()));
     }
 
     private void aplicarFiltros() {

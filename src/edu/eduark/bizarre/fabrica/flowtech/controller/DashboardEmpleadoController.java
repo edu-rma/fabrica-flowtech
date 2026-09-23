@@ -1,10 +1,6 @@
 package edu.eduark.bizarre.fabrica.flowtech.controller;
 
-import edu.eduark.bizarre.fabrica.flowtech.config.DataBaseConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import edu.eduark.bizarre.fabrica.flowtech.repository.OrdenProduccionRepository;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -19,6 +15,7 @@ import javafx.scene.control.TextField;
 
 /** Controlador para dashboard-empleado.fxml. */
 public class DashboardEmpleadoController {
+    
     @FXML private TableView<OrdenFila> tablaOrdenes;
     @FXML private TableColumn<OrdenFila, Number> colOrden;
     @FXML private TableColumn<OrdenFila, Number> colPedido;
@@ -35,6 +32,9 @@ public class DashboardEmpleadoController {
 
     private final ObservableList<OrdenFila> ordenes = FXCollections.observableArrayList();
     private FilteredList<OrdenFila> ordenesFiltradas;
+
+    // Instancia del repositorio
+    private final OrdenProduccionRepository ordenProduccionRepository = new OrdenProduccionRepository();
 
     @FXML
     private void initialize() {
@@ -57,21 +57,21 @@ public class DashboardEmpleadoController {
     }
 
     private void cargarOrdenes() {
-        String sql = "SELECT op.id_orden_produccion, COALESCE(op.id_pedido, 0) AS id_pedido, p.nombre, "
-                + "op.cantidad_a_fabricar, DATE_FORMAT(op.fecha_inicio, '%d/%m/%Y') AS fecha_inicio, op.estado "
-                + "FROM ordenes_produccion op INNER JOIN productos p ON p.id_producto = op.id_producto "
-                + "ORDER BY op.fecha_inicio DESC";
-        try (Connection conexion = DataBaseConnection.getConnection();
-                PreparedStatement sentencia = conexion.prepareStatement(sql);
-                ResultSet resultado = sentencia.executeQuery()) {
-            while (resultado.next()) {
-                ordenes.add(new OrdenFila(resultado.getInt("id_orden_produccion"), resultado.getInt("id_pedido"),
-                        resultado.getString("nombre"), resultado.getInt("cantidad_a_fabricar"),
-                        resultado.getString("fecha_inicio"), resultado.getString("estado")));
-            }
-        } catch (SQLException error) {
-            System.err.println("No fue posible cargar las órdenes: " + error.getMessage());
+        ordenes.clear();
+        
+        // Carga de datos desde el repositorio
+        var listaOrdenes = ordenProduccionRepository.obtenerOrdenesProduccion();
+        for (var item : listaOrdenes) {
+            ordenes.add(new OrdenFila(
+                item.idOrden(),
+                item.idPedido(),
+                item.producto(),
+                item.cantidad(),
+                item.fechaInicio(),
+                item.estado()
+            ));
         }
+        
         actualizarResumen();
     }
 

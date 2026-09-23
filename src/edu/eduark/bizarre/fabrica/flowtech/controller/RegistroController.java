@@ -1,12 +1,8 @@
 package edu.eduark.bizarre.fabrica.flowtech.controller;
 
-import edu.eduark.bizarre.fabrica.flowtech.config.DataBaseConnection;
+import edu.eduark.bizarre.fabrica.flowtech.repository.UsuarioRepository;
 import edu.eduark.bizarre.fabrica.flowtech.utils.SceneManager;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,6 +24,9 @@ public class RegistroController implements Initializable {
     @FXML private Button btnRegistrarEmpleado;
     @FXML private Button btnRegresarLogin;
 
+    // Instancia del nuevo repositorio de usuarios
+    private final UsuarioRepository usuarioRepository = new UsuarioRepository();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnRegresarLogin.setOnAction(event -> volverAlLogin());
@@ -42,31 +41,17 @@ public class RegistroController implements Initializable {
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String email = txtEmail.getText();
-        String clave = txtClave.getText(); 
+        String clave = txtClave.getText();
 
-        String sql = "INSERT INTO usuarios (id_rol, nombre, apellido, email, password_hash, activo) VALUES (?, ?, ?, ?, ?, TRUE)";
+        // Llamada limpia a la capa Repository
+        boolean exito = usuarioRepository.registrar(idRol, nombre, apellido, email, clave);
 
-
-        try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
-            pstmt.setInt(1, idRol);
-            pstmt.setString(2, nombre);
-            pstmt.setString(3, apellido);
-            pstmt.setString(4, email);
-            pstmt.setString(5, clave); 
-
-            int filasInsertadas = pstmt.executeUpdate();
-            
-            if (filasInsertadas > 0) {
-                lblMensaje.setText("¡Registro exitoso!");
-                lblMensaje.setStyle("-fx-text-fill: #2ecc71;");
-            }
-
-        } catch (SQLException e) {
+        if (exito) {
+            lblMensaje.setText("¡Registro exitoso!");
+            lblMensaje.setStyle("-fx-text-fill: #2ecc71;");
+        } else {
             lblMensaje.setText("Error al registrar.");
             lblMensaje.setStyle("-fx-text-fill: #e74c3c;");
-            e.printStackTrace();
         }
     }
 

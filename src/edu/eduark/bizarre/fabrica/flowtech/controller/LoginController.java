@@ -1,20 +1,15 @@
 package edu.eduark.bizarre.fabrica.flowtech.controller;
 
-import edu.eduark.bizarre.fabrica.flowtech.config.DataBaseConnection;
+import edu.eduark.bizarre.fabrica.flowtech.repository.AuthRepository;
 import edu.eduark.bizarre.fabrica.flowtech.utils.SceneManager;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 
 public class LoginController implements Initializable {
 
@@ -24,6 +19,7 @@ public class LoginController implements Initializable {
     @FXML private Button btnRegistrarse;
     @FXML private Label lblMensaje;
 
+    private final AuthRepository authRepository = new AuthRepository();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -31,7 +27,7 @@ public class LoginController implements Initializable {
         btnIniciarSesion.setOnAction(event -> iniciarSesionDocente());
     }
 
-   private void iniciarSesionDocente() {
+    private void iniciarSesionDocente() {
         String correo = txtCorreo.getText();
         String contrasena = txtContrasena.getText();
 
@@ -40,29 +36,16 @@ public class LoginController implements Initializable {
             return;
         }
 
-        String sql = "SELECT id_rol, nombre, password_hash FROM usuarios WHERE email = ? AND activo = TRUE";
+        AuthRepository.UsuarioAuth usuario = authRepository.buscarPorEmail(correo);
 
-
-        try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
-            pstmt.setString(1, correo);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                int idRol = rs.getInt("id_rol");
-                String hashDb = rs.getString("password_hash");
-                
-                if (contrasena.equals(hashDb)) { 
-                    redirigirPorRol(idRol);
-                } else {
-                    System.out.println("Contraseña incorrecta.");
-                }
+        if (usuario != null) {
+            if (contrasena.equals(usuario.passwordHash())) {
+                redirigirPorRol(usuario.idRol());
             } else {
-                System.out.println("El usuario no existe o está inactivo.");
+                System.out.println("Contraseña incorrecta.");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else {
+            System.out.println("El usuario no existe o está inactivo.");
         }
     }
 
