@@ -1,0 +1,17 @@
+#directorios de compilacion
+ 
+/build/
+/dist/
+/nbproject/private/
+ 
+#Archivos de compilacion
+*.class
+*.jar
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> feature/implementacion-registro-view
+=======
+*.zip
+>>>>>>> master

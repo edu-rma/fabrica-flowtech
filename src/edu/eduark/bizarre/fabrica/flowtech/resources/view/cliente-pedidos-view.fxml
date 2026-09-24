@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="16.0" styleClass="page-content" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.ClientePedidosController">
+    <padding>
+        <Insets top="26.0" right="26.0" bottom="26.0" left="26.0" />
+    </padding>
+    <children>
+        <Label styleClass="page-title" text="Mis pedidos" />
+        <Label text="Consulta el estado, detalle y factura de cada compra." />
+        <TableView fx:id="tabla" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colPedido" text="Pedido" prefWidth="140.0" />
+                <TableColumn fx:id="colFecha" text="Fecha" prefWidth="110.0" />
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="130.0" />
+                <TableColumn fx:id="colTotal" text="Total" prefWidth="100.0" />
+                <TableColumn fx:id="colFactura" text="Factura" />
+            </columns>
+        </TableView>
+        <Label styleClass="hint-label" text="Haz doble clic en un pedido para desplegar sus artículos. Usa PDF para descargar o imprimir la factura." />
+    </children>
+</VBox>
