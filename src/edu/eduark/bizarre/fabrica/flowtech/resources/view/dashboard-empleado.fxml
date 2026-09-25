@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="650.0" prefWidth="1050.0" stylesheets="@../style/css/flowtech-theme.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.DashboardEmpleadoController">
+<BorderPane prefHeight="700.0" prefWidth="1150.0" stylesheets="@../style/css/flowtech-theme.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.dashboard.DashboardEmpleadoController">
    <top>
       <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="topbar">
          <children>
@@ -23,16 +25,17 @@
             </VBox>
             <HBox HBox.hgrow="ALWAYS" />
             <Label styleClass="user-chip" text="Empleado" />
+            <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#cerrarSesion" styleClass="menu-button-salir" text="Cerrar sesión" />
          </children>
       </HBox>
    </top>
    <center>
-      <VBox spacing="20.0" styleClass="page-content">
+      <VBox spacing="18.0" styleClass="page-content">
          <children>
             <VBox spacing="4.0">
                <children>
-                  <Label styleClass="page-title" text="Mis órdenes de producción" />
-                  <Label styleClass="page-subtitle" text="Consulta y actualiza las órdenes que tienes asignadas." />
+                  <Label styleClass="page-title" text="Panel de empleado" />
+                  <Label styleClass="page-subtitle" text="Gestiona pedidos, revisa tus órdenes de producción y consulta el inventario." />
                </children>
             </VBox>
             <HBox spacing="16.0">
@@ -48,31 +51,95 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox spacing="14.0" styleClass="table-card" VBox.vgrow="ALWAYS">
-               <children>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <Label styleClass="section-title" text="Órdenes a cargo" />
-                        <HBox HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="cmbEstado" prefWidth="145.0" promptText="Estado" />
-                        <TextField fx:id="txtBuscar" prefWidth="220.0" promptText="Buscar por orden o producto" />
-                     </children>
-                  </HBox>
-                  <TableView fx:id="tablaOrdenes" VBox.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn fx:id="colOrden" prefWidth="75.0" text="ORDEN" />
-                        <TableColumn fx:id="colPedido" prefWidth="75.0" text="PEDIDO" />
-                        <TableColumn fx:id="colProducto" prefWidth="280.0" text="PRODUCTO" />
-                        <TableColumn fx:id="colCantidad" prefWidth="100.0" text="CANTIDAD" />
-                        <TableColumn fx:id="colInicio" prefWidth="130.0" text="FECHA INICIO" />
-                        <TableColumn fx:id="colEstado" prefWidth="135.0" text="ESTADO" />
-                        <TableColumn fx:id="colAccion" prefWidth="120.0" text="ACCIÓN" />
-                     </columns>
-                  </TableView>
-               </children>
-            </VBox>
+            <TabPane fx:id="tabsEmpleado" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+               <tabs>
+                  <Tab text="Mis órdenes">
+                     <content>
+                        <VBox spacing="14.0" styleClass="table-card">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="section-title" text="Órdenes de producción" />
+                                    <HBox HBox.hgrow="ALWAYS" />
+                                    <ComboBox fx:id="cmbEstadoOrden" prefWidth="145.0" promptText="Estado" />
+                                    <TextField fx:id="txtBuscarOrden" prefWidth="220.0" promptText="Buscar por orden o producto" />
+                                 </children>
+                              </HBox>
+                              <TableView fx:id="tablaOrdenes" VBox.vgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="colOrden" prefWidth="75.0" text="ORDEN" />
+                                    <TableColumn fx:id="colPedido" prefWidth="75.0" text="PEDIDO" />
+                                    <TableColumn fx:id="colProductoOrden" prefWidth="260.0" text="PRODUCTO" />
+                                    <TableColumn fx:id="colCantidad" prefWidth="95.0" text="CANTIDAD" />
+                                    <TableColumn fx:id="colInicio" prefWidth="125.0" text="FECHA INICIO" />
+                                    <TableColumn fx:id="colEstadoOrden" prefWidth="130.0" text="ESTADO" />
+                                    <TableColumn fx:id="colAccion" prefWidth="110.0" text="ACCIÓN" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                           <padding><Insets bottom="20.0" left="4.0" right="4.0" top="4.0" /></padding>
+                        </VBox>
+                     </content>
+                  </Tab>
+                  <Tab text="Pedidos">
+                     <content>
+                        <VBox spacing="14.0" styleClass="table-card">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="section-title" text="Pedidos" />
+                                    <HBox HBox.hgrow="ALWAYS" />
+                                    <ComboBox fx:id="cmbFiltroPedidos" prefWidth="165.0" />
+                                    <TextField fx:id="txtBuscarPedidos" prefWidth="200.0" promptText="Buscar por cliente o #ID" />
+                                    <Button fx:id="btnNuevoPedido" onAction="#agregarPedido" styleClass="quick-action" text="+ Nuevo pedido" />
+                                 </children>
+                              </HBox>
+                              <TableView fx:id="tablaPedidos" VBox.vgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="colIdPedido" prefWidth="70.0" text="ID" />
+                                    <TableColumn fx:id="colCliente" prefWidth="170.0" text="CLIENTE" />
+                                    <TableColumn fx:id="colEmpleado" prefWidth="170.0" text="EMPLEADO" />
+                                    <TableColumn fx:id="colFechaPedido" prefWidth="140.0" text="FECHA" />
+                                    <TableColumn fx:id="colEstadoPedido" prefWidth="130.0" text="ESTADO" />
+                                    <TableColumn fx:id="colTotalPedido" prefWidth="100.0" text="TOTAL" />
+                                    <TableColumn fx:id="colAccionesPedido" prefWidth="210.0" text="ACCIONES" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                           <padding><Insets bottom="20.0" left="4.0" right="4.0" top="4.0" /></padding>
+                        </VBox>
+                     </content>
+                  </Tab>
+                  <Tab text="Inventario">
+                     <content>
+                        <VBox spacing="14.0" styleClass="table-card">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="section-title" text="Inventario de productos (solo lectura)" />
+                                    <HBox HBox.hgrow="ALWAYS" />
+                                    <ComboBox fx:id="cmbFiltroInventario" prefWidth="145.0" />
+                                    <TextField fx:id="txtBuscarInventario" prefWidth="220.0" promptText="Buscar por SKU o producto" />
+                                 </children>
+                              </HBox>
+                              <TableView fx:id="tablaInventario" VBox.vgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="colSku" prefWidth="120.0" text="SKU" />
+                                    <TableColumn fx:id="colProductoInventario" prefWidth="320.0" text="PRODUCTO" />
+                                    <TableColumn fx:id="colStock" prefWidth="120.0" text="STOCK ACTUAL" />
+                                    <TableColumn fx:id="colMinimo" prefWidth="120.0" text="STOCK MÍNIMO" />
+                                    <TableColumn fx:id="colEstadoInventario" prefWidth="140.0" text="ESTADO" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                           <padding><Insets bottom="20.0" left="4.0" right="4.0" top="4.0" /></padding>
+                        </VBox>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
          </children>
-         <padding><Insets bottom="28.0" left="36.0" right="36.0" top="28.0" /></padding>
+         <padding><Insets bottom="24.0" left="36.0" right="36.0" top="24.0" /></padding>
       </VBox>
    </center>
 </BorderPane>

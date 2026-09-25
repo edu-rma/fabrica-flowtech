@@ -7,7 +7,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToWidth="true" styleClass="content-scroll" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.ClientePerfilController">
+<ScrollPane fitToWidth="true" styleClass="content-scroll" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.cliente.ClientePerfilController">
     <content>
         <VBox spacing="16.0" styleClass="page-content">
             <padding>
@@ -23,8 +23,8 @@
                     </padding>
                     <children>
                         <Label styleClass="page-title" text="Metodos de pago guardados" />
-                        <Label fx:id="lblMetodoPreferido" text="Sin metodos guardados" />
-                        <Button text="Administrar metodos" onAction="#administrarMetodos" />
+                        <Label fx:id="lblMetodoPreferido" text="No tienes métodos de pago seleccionados" />
+                        <Button text="Administrar métodos" onAction="#administrarMetodos" />
                     </children>
                 </VBox>
 

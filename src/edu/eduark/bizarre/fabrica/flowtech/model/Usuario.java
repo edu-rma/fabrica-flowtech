@@ -1,102 +1,62 @@
-
 package edu.eduark.bizarre.fabrica.flowtech.model;
 
 import java.sql.Timestamp;
-
 public class Usuario {
-    
-    private int idUsuario;
-    private String nombre;
-    private String usuario;
-    private String clave;
-    private String rol;
-    private String estado;
-    private Timestamp fechaCreacion;
 
- 
+    private int idUsuario;
+    private int idRol;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private String passwordHash;
+    private boolean activo;
+    private Timestamp fechaRegistro;
+
     public Usuario() {
     }
 
-
-    public Usuario(String nombre, String usuario, String clave, String rol, String estado) {
-        this.nombre = nombre;
-        this.usuario = usuario;
-        this.clave = clave;
-        this.rol = rol;
-        this.estado = estado;
-    }
-
-
-    public Usuario(int idUsuario, String nombre, String usuario, String clave, String rol, String estado, Timestamp fechaCreacion) {
+    public Usuario(int idUsuario, int idRol, String nombre, String apellido, String email,
+            String passwordHash, boolean activo, Timestamp fechaRegistro) {
         this.idUsuario = idUsuario;
+        this.idRol = idRol;
         this.nombre = nombre;
-        this.usuario = usuario;
-        this.clave = clave;
-        this.rol = rol;
-        this.estado = estado;
-        this.fechaCreacion = fechaCreacion;
+        this.apellido = apellido;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.activo = activo;
+        this.fechaRegistro = fechaRegistro;
     }
 
+    public int getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
+    public int getIdRol() { return idRol; }
+    public void setIdRol(int idRol) { this.idRol = idRol; }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getApellido() { return apellido; }
+    public void setApellido(String apellido) { this.apellido = apellido; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getUsuario() {
-        return usuario;
-    }
+    public String getPasswordHash() { return passwordHash; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
+    public boolean isActivo() { return activo; }
+    public void setActivo(boolean activo) { this.activo = activo; }
 
-    public String getClave() {
-        return clave;
-    }
+    public Timestamp getFechaRegistro() { return fechaRegistro; }
+    public void setFechaRegistro(Timestamp fechaRegistro) { this.fechaRegistro = fechaRegistro; }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Timestamp getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Timestamp fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public String nombreCompleto() {
+        return apellido == null || apellido.isBlank() ? nombre : nombre + " " + apellido;
     }
 
     @Override
     public String toString() {
-        return this.nombre + " (" + this.usuario + ")";
+        return nombreCompleto() + " (" + email + ")";
     }
 }
-    

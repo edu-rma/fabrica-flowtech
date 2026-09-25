@@ -12,13 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
-/**
- * Genera un comprobante de pedido como archivo de texto real en el disco del
- * usuario. No depende de ninguna librería de PDF (el proyecto no trae
- * ninguna), así que el "documento" es un .txt con el detalle del pedido.
- * Se usa tanto desde "Descargar factura" en Inicio como desde el botón PDF
- * de Mis Pedidos, para no duplicar la lógica.
- */
 public final class FacturaUtil {
 
     private FacturaUtil() {

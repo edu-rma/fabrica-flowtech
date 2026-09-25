@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/css/flowtech-theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.ClienteDashboardController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/css/flowtech-theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.cliente.ClienteDashboardController">
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="173.0" spacing="8.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <padding>
