@@ -1,7 +1,6 @@
 package edu.eduark.bizarre.fabrica.flowtech.controller;
 
-import edu.eduark.bizarre.fabrica.flowtech.exception.ServicioException;
-import edu.eduark.bizarre.fabrica.flowtech.service.UsuarioService;
+import edu.eduark.bizarre.fabrica.flowtech.repository.AuthRepository;
 import edu.eduark.bizarre.fabrica.flowtech.utils.SceneManager;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class RegistroController implements Initializable {
 
@@ -19,16 +19,19 @@ public class RegistroController implements Initializable {
     @FXML private TextField txtEmail;
     @FXML private PasswordField txtClave;
     @FXML private PasswordField txtConfirmarClave;
-    @FXML private Label lblMensaje;
+    @FXML private Label lblMensaje; 
     @FXML private Label lblTipoCuenta;
-
+    
     @FXML private Button btnRegistrarUsuario;
     @FXML private Button btnRegresarLogin;
 
-    private final UsuarioService usuarioService = new UsuarioService();
+    // Instancia del repositorio
+    private AuthRepository authRepository;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        authRepository = new AuthRepository(); // Inicializamos el repositorio
+        
         btnRegresarLogin.setOnAction(event -> volverAlLogin());
         btnRegistrarUsuario.setOnAction(event -> registrarUsuario());
         txtEmail.textProperty().addListener((observable, anterior, correo) -> actualizarTipoCuenta(correo));
@@ -36,60 +39,91 @@ public class RegistroController implements Initializable {
     }
 
     private void registrarUsuario() {
-        if (!validarCampos()) {
-            return;
-        }
+        if (!validarCampos()) return;
 
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String email = txtEmail.getText().trim().toLowerCase();
         String clave = txtClave.getText();
+        int idRol = obtenerRolPorCorreo(email);
+        String passwordHash = BCrypt.hashpw(clave, BCrypt.gensalt(12));
 
-        try {
-            usuarioService.registrar(nombre, apellido, email, clave);
-            int idRol = usuarioService.rolPorCorreo(email);
-            lblMensaje.setText("¡Registro exitoso como " + usuarioService.nombreRol(idRol) + "!");
-            lblMensaje.setStyle("-fx-text-fill: #2ecc71;");
-        } catch (ServicioException error) {
-            lblMensaje.setText(error.getMessage() != null ? error.getMessage() : "Error al registrar.");
-            lblMensaje.setStyle("-fx-text-fill: #e74c3c;");
+  
+        boolean registroExitoso = authRepository.registrarUsuario(idRol, nombre, apellido, email, passwordHash);
+
+        if (registroExitoso) {
+            SceneManager.getInstance().showInformation(
+                "Registro Exitoso", 
+                "¡El cliente " + nombre + " ha sido registrado correctamente como " + nombreRol(idRol) + "!"
+            );
+            volverAlLogin();
+        } else {
+            SceneManager.getInstance().showError(
+                "Error al Registrar", 
+                "Ocurrió un problema en la base de datos. Es posible que este correo ya esté registrado."
+            );
         }
+    }
+
+    private int obtenerRolPorCorreo(String correo) {
+        if (correo.endsWith("@flowtechad.com")) {
+            return 1;
+        }
+        if (correo.endsWith("@flowtech.com")) {
+            return 2;
+        }
+        return 3;
+    }
+
+    private String nombreRol(int idRol) {
+        return switch (idRol) {
+            case 1 -> "administrador";
+            case 2 -> "empleado";
+            default -> "cliente"; 
+        };
     }
 
     private void actualizarTipoCuenta(String correo) {
         if (correo == null || correo.trim().isEmpty()) {
-            lblTipoCuenta.setText("El rol se asignará según el correo institucional.");
+            lblTipoCuenta.setText("El rol se asignará según el correo agregado.");
             return;
         }
-        int idRol = usuarioService.rolPorCorreo(correo.trim().toLowerCase());
-        lblTipoCuenta.setText("Se registrará como: " + usuarioService.nombreRol(idRol) + ".");
+        lblTipoCuenta.setText("Se registrará como: " + nombreRol(obtenerRolPorCorreo(correo.trim().toLowerCase())) + ".");
     }
 
     private boolean validarCampos() {
-        if (txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || txtClave.getText().isEmpty()) {
-            lblMensaje.setText("Por favor, llena todos los campos obligatorios.");
-            lblMensaje.setStyle("-fx-text-fill: #e74c3c;");
+        if (txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || 
+            txtClave.getText().isEmpty() || txtConfirmarClave.getText().isEmpty()) {
+            
+            SceneManager.getInstance().showWarning(
+                "Campos Incompletos", 
+                "Por favor, llena todos los campos obligatorios."
+            );
             return false;
         }
 
         if (!txtEmail.getText().trim().matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
-            lblMensaje.setText("Ingresa un correo electrónico válido.");
-            lblMensaje.setStyle("-fx-text-fill: #e74c3c;");
+            SceneManager.getInstance().showWarning(
+                "Correo Inválido", 
+                "Ingresa un correo electrónico válido."
+            );
             return false;
         }
-
+        
         if (!txtClave.getText().equals(txtConfirmarClave.getText())) {
-            lblMensaje.setText("Las contraseñas no coinciden.");
-            lblMensaje.setStyle("-fx-text-fill: #e74c3c;");
+            SceneManager.getInstance().showWarning(
+                "Contraseñas no coinciden", 
+                "Las contraseñas ingresadas no son iguales. Verifica e inténtalo de nuevo."
+            );
             return false;
         }
-
-        return true;
+        
+        return true; 
     }
 
     private void volverAlLogin() {
         SceneManager.getInstance().changeScene(
-            "/edu/eduark/bizarre/fabrica/flowtech/resources/view/login-view.fxml",
+            "/edu/eduark/bizarre/fabrica/flowtech/resources/view/login-view.fxml", 
             "FlowTech - Iniciar Sesión"
         );
     }
