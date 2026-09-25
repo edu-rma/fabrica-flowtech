@@ -11,31 +11,31 @@
     <content>
         <VBox spacing="16.0" styleClass="page-content">
             <padding>
-                <Insets top="26.0" right="26.0" bottom="26.0" left="26.0" />
+                <Insets bottom="26.0" left="26.0" right="26.0" top="26.0" />
             </padding>
             <children>
                 <Label styleClass="page-title" text="Mi perfil" />
                 <Label fx:id="lblUsuario" text="Cliente" />
 
-                <VBox styleClass="card" spacing="10.0">
+                <VBox spacing="10.0" styleClass="card">
                     <padding>
-                        <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                     </padding>
                     <children>
                         <Label styleClass="page-title" text="Metodos de pago guardados" />
                         <Label fx:id="lblMetodoPreferido" text="No tienes métodos de pago seleccionados" />
-                        <Button text="Administrar métodos" onAction="#administrarMetodos" />
+                        <Button onAction="#administrarMetodos" text="Administrar métodos" />
                     </children>
                 </VBox>
 
-                <VBox styleClass="card" spacing="10.0">
+                <VBox spacing="10.0" styleClass="card">
                     <padding>
-                        <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                     </padding>
                     <children>
                         <Label styleClass="page-title" text="Preferencias de notificacion" />
-                        <CheckBox fx:id="chkCorreo" text="Alertas sobre pedidos por correo" onAction="#cambiarNotificarCorreo" />
-                        <CheckBox fx:id="chkSms" text="Alertas sobre pedidos por SMS" onAction="#cambiarNotificarSms" />
+                        <CheckBox fx:id="chkCorreo" onAction="#cambiarNotificarCorreo" text="Alertas sobre pedidos por correo" />
+                        <CheckBox fx:id="chkSms" onAction="#cambiarNotificarSms" text="Quiero recibir notificaciones por correo electrónico" />
                         <Label fx:id="lblEstadoPreferencias" styleClass="cart-summary" text="" />
                     </children>
                 </VBox>
