@@ -1,3 +1,4 @@
+
 package edu.eduark.bizarre.fabrica.flowtech.config;
  
 public class Credentials {

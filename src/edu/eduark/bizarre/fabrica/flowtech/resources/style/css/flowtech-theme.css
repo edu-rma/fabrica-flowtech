@@ -1,25 +1,11 @@
-/* ============================================================
-   FlowTech — Hoja de estilos unificada
-   Control de Producción y Ensamblaje
-   ------------------------------------------------------------
-   Paleta (tomada del logo / mockups de UX Pilot):
-     Azul marino (nav/sidebar) ....... #0F1B2C
-     Azul primario .................... #1565C0
-     Azul claro / acento .............. #1E88E5
-     Cian (detalle, gradientes) ....... #0EA5E9
-     Verde (éxito / disponible) ....... #16A34A / fondo #DCFCE7
-     Ámbar (en proceso / atención) .... #D97706 / fondo #FEF3C7
-     Rojo (crítico / agotado) ......... #DC2626 / fondo #FEE2E2
-     Fondo general ..................... #F3F4F6
-     Texto secundario .................. #6B7280
-   ============================================================ */
+
 
 .root {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
 }
 
-/* ---------- Fondo general de la ventana / pantallas de contenido ---------- */
+
 .content-area,
 .content-scroll,
 .content-scroll > .viewport,
@@ -30,10 +16,7 @@
 }
 .page-content { -fx-padding: 0; }
 
-/* ============================================================
-   CONTROLES GENÉRICOS (campos de texto, botones por defecto)
-   Aplica a Login, Registro y cualquier formulario sin clase propia
-   ============================================================ */
+
 .text-field, .password-field, .combo-box, .text-area {
     -fx-background-color: white;
     -fx-background-radius: 8;
@@ -65,9 +48,7 @@
     -fx-background-color: linear-gradient(to right, #0D4B94, #0B85B8);
 }
 
-/* ============================================================
-   LOGIN / REGISTRO — Panel de marca (lado izquierdo)
-   ============================================================ */
+
 .brand-panel {
     -fx-background-color: #0B1626;
 }
@@ -102,14 +83,11 @@
     -fx-padding: 14;
 }
 
-/* ============================================================
-   LOGIN / REGISTRO — Panel de formulario (lado derecho)
-   ============================================================ */
 .form-panel { -fx-background-color: white; -fx-padding: 42; }
 .form-title { -fx-font-size: 23px; -fx-font-weight: bold; -fx-text-fill: #0F1B2C; }
 .form-subtitle { -fx-font-size: 12.5px; -fx-text-fill: #6B7280; }
 
-/* Contenedor con ícono + campo, simula un solo input con ícono a la izquierda */
+
 .input-group {
     -fx-background-color: white;
     -fx-border-color: #D1D5DB;
@@ -149,9 +127,7 @@
     -fx-text-fill: #0F1B2C;
 }
 
-/* ============================================================
-   REGISTRO
-   ============================================================ */
+
 .main-container { -fx-background-color: transparent; }
 .titulo-vista {
     -fx-font-size: 24px;
@@ -178,9 +154,7 @@
     -fx-font-weight: bold;
 }
 
-/* ============================================================
-   SIDEBAR (Dashboard Cliente / Empleado)
-   ============================================================ */
+
 .sidebar {
     -fx-background-color: linear-gradient(to bottom, #0F1B2C, #16273F);
 }
@@ -226,9 +200,6 @@
 }
 .menu-button-salir:hover { -fx-background-color: #4b1d1d; }
 
-/* ============================================================
-   TOPBAR (Dashboard Admin / Empleado)
-   ============================================================ */
 .topbar {
     -fx-background-color: #0F1B2C;
     -fx-padding: 16 32;
@@ -252,17 +223,12 @@
 }
 .admin-chip { -fx-background-color: #1565C0; -fx-text-fill: white; }
 
-/* ============================================================
-   TÍTULOS DE PÁGINA / SECCIÓN (compartidos en todas las vistas)
-   ============================================================ */
 .content-label { -fx-font-size: 18px; -fx-text-fill: #1f2937; }
 .page-title { -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #0F1B2C; }
 .page-subtitle { -fx-font-size: 13px; -fx-text-fill: #6B7280; }
 .section-title { -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #0F1B2C; }
 
-/* ============================================================
-   TARJETAS (KPI cliente y métricas admin/empleado)
-   ============================================================ */
+
 .card, .kpi-card, .product-card, .table-card {
     -fx-background-color: white;
     -fx-background-radius: 12;
@@ -297,10 +263,7 @@
 .metric-warning .metric-value { -fx-text-fill: #D97706; }
 .metric-danger .metric-value  { -fx-text-fill: #DC2626; }
 
-/* ============================================================
-   ESTADOS / BADGES (pedidos, inventario)
-   Verde = éxito/disponible · Ámbar = en proceso/atención · Rojo = crítico
-   ============================================================ */
+
 .timeline-done, .timeline-next {
     -fx-padding: 6 12;
     -fx-background-radius: 14;
@@ -323,9 +286,7 @@
     -fx-background-radius: 14; -fx-padding: 4 10; -fx-font-size: 11px; -fx-font-weight: bold;
 }
 
-/* ============================================================
-   BOTONES DE ACCIÓN
-   ============================================================ */
+
 .quick-action, .cart-button {
     -fx-background-color: #1565C0;
     -fx-text-fill: white;
@@ -351,9 +312,7 @@
 .cart-summary { -fx-font-weight: bold; -fx-text-fill: #1565C0; -fx-padding: 8 0 0 0; }
 .hint-label { -fx-text-fill: #6B7280; -fx-font-size: 12px; }
 
-/* ============================================================
-   CATÁLOGO / TARJETA DE PRODUCTO
-   ============================================================ */
+
 .product-container { -fx-padding: 4 0; }
 .product-card { -fx-min-height: 160; }
 .category-visual {
@@ -368,9 +327,6 @@
 .product-code { -fx-font-size: 10px; -fx-text-fill: #64748b; }
 .product-details { -fx-font-size: 12px; -fx-text-fill: #334155; }
 
-/* ============================================================
-   TABLAS (TableView — inventario admin, pedidos, etc.)
-   ============================================================ */
 .table-view {
     -fx-background-color: transparent;
     -fx-table-cell-border-color: transparent;

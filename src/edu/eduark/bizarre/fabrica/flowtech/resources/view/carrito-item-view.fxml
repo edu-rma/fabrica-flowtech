@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox spacing="8.0" alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.CarritoItemController">
+<HBox spacing="8.0" alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.carrito.CarritoItemController">
     <children>
         <Label fx:id="lblNombre" wrapText="true" prefWidth="230.0" />
         <Button fx:id="btnMenos" text="−" onAction="#restar" />
