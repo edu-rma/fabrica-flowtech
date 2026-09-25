@@ -1,4 +1,3 @@
-
 package edu.eduark.bizarre.fabrica.flowtech.config;
  
 public class Credentials {
@@ -10,4 +9,3 @@ public class Credentials {
     public static final String DB_PASSWORD = "";
 
 }
- 

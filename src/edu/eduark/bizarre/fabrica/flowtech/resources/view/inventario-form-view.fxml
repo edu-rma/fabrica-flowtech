@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 
@@ -23,17 +22,9 @@
         <Label fx:id="lblProductoFijo" GridPane.rowIndex="0" GridPane.columnIndex="1" />
 
         <Label text="Stock actual:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-        <Spinner fx:id="spnActual" editable="true" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" GridPane.columnIndex="1">
-            <valueFactory>
-                <IntegerSpinnerValueFactory min="0" max="1000000" initialValue="0" />
-            </valueFactory>
-        </Spinner>
+        <Spinner fx:id="spnActual" editable="true" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" GridPane.columnIndex="1" />
 
         <Label text="Stock mínimo:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-        <Spinner fx:id="spnMinimo" editable="true" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" GridPane.columnIndex="1">
-            <valueFactory>
-                <IntegerSpinnerValueFactory min="0" max="1000000" initialValue="5" />
-            </valueFactory>
-        </Spinner>
+        <Spinner fx:id="spnMinimo" editable="true" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" GridPane.columnIndex="1" />
     </children>
 </GridPane>

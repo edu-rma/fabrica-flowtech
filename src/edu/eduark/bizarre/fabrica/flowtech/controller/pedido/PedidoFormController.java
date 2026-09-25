@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -38,13 +39,23 @@ public class PedidoFormController {
 
     @FXML
     private void initialize() {
+        // 1. Configurar la fábrica de valores del Spinner (min: 1, max: 100, inicial: 1)
+        SpinnerValueFactory<Integer> valueFactory = 
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+        spnCantidad.setValueFactory(valueFactory);
+
         colLineaProducto.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().producto().nombre()));
         colLineaCantidad.setCellValueFactory(d -> new ReadOnlyIntegerWrapper(d.getValue().cantidad()));
+        
+        // 2. Corrección de la celda del botón "Quitar" usando getTableRow()
         colLineaQuitar.setCellFactory(columna -> new TableCell<>() {
             private final Button btnQuitar = new Button("Quitar");
             {
                 btnQuitar.getStyleClass().add("remove-cart-button");
-                btnQuitar.setOnAction(e -> lineas.remove(getIndex()));
+                btnQuitar.setOnAction(e -> {
+                    LineaPedido lineaActual = getTableView().getItems().get(getIndex());
+                    lineas.remove(lineaActual);
+                });
             }
 
             @Override
@@ -53,6 +64,7 @@ public class PedidoFormController {
                 setGraphic(vacio ? null : btnQuitar);
             }
         });
+        
         tablaLineas.setItems(lineas);
     }
 
@@ -71,6 +83,11 @@ public class PedidoFormController {
         if (seleccionado == null) {
             return;
         }
+
+        // 3. Obtención segura del valor del Spinner con fallback a 1
+        Integer cantidadValor = spnCantidad.getValue();
+        int cantidad = (cantidadValor != null) ? cantidadValor : 1;
+
         boolean yaExiste = lineas.stream().anyMatch(linea -> linea.producto().id() == seleccionado.id());
         if (yaExiste) {
             Alert alerta = new Alert(AlertType.INFORMATION,
@@ -80,7 +97,8 @@ public class PedidoFormController {
             alerta.showAndWait();
             return;
         }
-        lineas.add(new LineaPedido(seleccionado, spnCantidad.getValue()));
+
+        lineas.add(new LineaPedido(seleccionado, cantidad));
     }
 
     public UsuarioOpcion getCliente() {

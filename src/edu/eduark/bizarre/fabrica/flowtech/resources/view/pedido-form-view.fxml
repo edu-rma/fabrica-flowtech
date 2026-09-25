@@ -5,7 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
+<?import javafx.scene.control.SpinnerValueFactory?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -34,17 +34,13 @@
 
         <Label text="Productos del pedido:" />
 
-        <HBox spacing="8.0">
-            <children>
-                <ComboBox fx:id="cmbProducto" />
-                <Spinner fx:id="spnCantidad" editable="true">
-                    <valueFactory>
-                        <IntegerSpinnerValueFactory min="1" max="10000" initialValue="1" />
-                    </valueFactory>
-                </Spinner>
-                <Button fx:id="btnAgregarLinea" text="+ Agregar producto" styleClass="small-action" onAction="#agregarLinea" />
-            </children>
-        </HBox>
+<HBox spacing="8.0">
+    <children>
+        <ComboBox fx:id="cmbProducto" />
+        <Spinner fx:id="spnCantidad" editable="true" />
+        <Button fx:id="btnAgregarLinea" text="+ Agregar producto" styleClass="small-action" onAction="#agregarLinea" />
+    </children>
+</HBox>
 
         <TableView fx:id="tablaLineas" prefHeight="150.0">
             <columns>
