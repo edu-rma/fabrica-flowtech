@@ -94,7 +94,7 @@
                      </children>
                   </HBox>
 
-                  <Label styleClass="form-hint" text="El rol se asignará según el correo institucional." wrapText="true" />
+                  <Label styleClass="form-hint" text="El rol se asignará según el correo agregado." wrapText="true" />
                   <Label fx:id="lblMensaje" styleClass="mensaje-label" wrapText="true" />
                   <Label fx:id="lblTipoCuenta" styleClass="rol-detectado" wrapText="true" />
 
