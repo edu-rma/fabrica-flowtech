@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="raiz" spacing="7.0" styleClass="product-card" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.pedido.ProductoCardController">
+    <padding>
+        <Insets top="14.0" right="14.0" bottom="14.0" left="14.0" />
+    </padding>
+    <children>
+        <Label fx:id="lblIcono" styleClass="category-visual" maxWidth="1.7976931348623157E308" />
+        <Label fx:id="lblCategoria" />
+        <Label fx:id="lblNombre" styleClass="page-title" />
+        <Label fx:id="lblCodigo" styleClass="product-code" />
+        <Label fx:id="lblDetalle" styleClass="product-details" wrapText="true" />
+        <Label fx:id="lblDisponibilidad" />
+        <HBox spacing="8.0">
+            <children>
+                <Button fx:id="btnFicha" text="Ver ficha" onAction="#verFicha" />
+                <Button fx:id="btnAgregar" styleClass="add-cart-button" text="+ Añadir al carrito" onAction="#agregarAlCarrito" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

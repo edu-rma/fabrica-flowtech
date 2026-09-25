@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eduark.bizarre.fabrica.flowtech.controller.carrito.CarritoDialogController">
+    <padding>
+        <Insets top="8.0" right="8.0" bottom="8.0" left="8.0" />
+    </padding>
+    <children>
+        <Label fx:id="lblVacio" text="Tu carrito está vacío." managed="false" visible="false" />
+        <Label fx:id="lblAyuda" text="Modifica las cantidades o elimina un producto:" managed="false" visible="false" />
+        <VBox fx:id="filas" spacing="8.0" />
+        <Label fx:id="lblResumen" styleClass="cart-summary" managed="false" visible="false" />
+    </children>
+</VBox>
